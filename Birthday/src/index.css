@@ -211,20 +211,21 @@ body {
 }
 .form-label { font-weight: 600; margin-bottom: 0.4rem; display: block; }
 .form-control, .form-select {
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.22);
-  color: var(--theme-text);
+  background: #ffffff;
+  border: 1.5px solid rgba(74, 37, 69, 0.22);
+  color: #4a2545;
   border-radius: 12px;
   padding: 0.65rem 0.9rem;
 }
-.form-control::placeholder { color: rgba(255,255,255,0.45); }
+.form-control::placeholder { color: rgba(74, 37, 69, 0.45); }
 .form-control:focus, .form-select:focus {
-  background: rgba(255,255,255,0.16);
-  color: var(--theme-text);
+  background: #ffffff;
+  color: #4a2545;
   border-color: var(--accent);
   box-shadow: 0 0 0 3px var(--soft);
 }
 .form-select option { color: #222; }
+input[type='date'].form-control { color-scheme: light; }
 textarea.form-control { resize: vertical; min-height: 90px; }
 
 .wizard-nav {
