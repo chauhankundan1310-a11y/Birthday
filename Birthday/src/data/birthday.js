@@ -1,0 +1,28 @@
+export const initialBirthday = {
+  relationship: '',
+  themeId: 'cute',
+  name: '',
+  senderName: '',
+  date: '',
+  heading: '',
+  intro: '',
+  photos: [],
+  music: { type: 'none', url: '', fileName: '' },
+  messages: Array.from({ length: 5 }, () => ({
+    category: 'romantic',
+    mode: 'preset',
+    presetIndex: 0,
+    language: 'en',
+    customText: '',
+  })),
+  animations: {
+    gift: true,
+    balloons: true,
+    textReveal: true,
+    envelopes: true,
+    photos: true,
+    letter: true,
+    candles: true,
+    finale: true,
+  },
+};
