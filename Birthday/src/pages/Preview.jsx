@@ -171,7 +171,9 @@ export default function Preview() {
     <>
       <SurpriseExperience
         data={previewData}
-        preview={false}
+        preview
+        topBar={<></>}
+        gateDate={draft.date || null}
         onSceneIndex={(i, total) => setEnded(i >= total - 1)}
       />
 

@@ -69,5 +69,5 @@ export default function Surprise() {
     );
   }
 
-  return <SurpriseExperience data={data} />;
+  return <SurpriseExperience data={data} gateDate={data.date || null} />;
 }
