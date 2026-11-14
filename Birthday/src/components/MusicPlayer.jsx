@@ -50,6 +50,14 @@ export default function MusicPlayer({ music }) {
     ctxRef.current = null;
   };
 
+  const loopMelody = () => {
+    const ctx = ctxRef.current;
+    if (!ctx) return;
+    const { oscs, duration } = playMelody(ctx, ctx.destination);
+    oscsRef.current = oscs;
+    melodyTimerRef.current = setTimeout(loopMelody, duration * 1000 + 150);
+  };
+
   const start = () => {
     if (!enabled) return;
     if (isMelody) {
@@ -58,20 +66,14 @@ export default function MusicPlayer({ music }) {
       const ctx = ctxRef.current || new AC();
       ctxRef.current = ctx;
       if (ctx.state === 'suspended') ctx.resume().catch(() => {});
-      const { oscs, duration } = playMelody(ctx, ctx.destination);
-      oscsRef.current = oscs;
       setPlaying(true);
       clearTimeout(melodyTimerRef.current);
-      melodyTimerRef.current = setTimeout(() => {
-        stopMelody();
-        setPlaying(false);
-      }, duration * 1000 + 300);
+      loopMelody();
     } else {
       const a = audioRef.current;
       if (!a) return;
       a.currentTime = 0;
       a.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
-      a.onended = () => setPlaying(false);
     }
   };
 
@@ -111,7 +113,7 @@ export default function MusicPlayer({ music }) {
 
   return (
     <div className="music-bar">
-      {hasAudio && <audio ref={audioRef} src={music.url} preload="auto" />}
+      {hasAudio && <audio ref={audioRef} src={music.url} preload="auto" loop />}
       <button type="button" className="music-btn" onClick={() => (playing ? stop() : start())} aria-label={playing ? 'Pause music' : 'Play music'}>
         {playing ? <FaPause /> : <FaPlay />}
       </button>
