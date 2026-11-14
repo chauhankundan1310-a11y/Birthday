@@ -173,7 +173,6 @@ export default function Preview() {
         data={previewData}
         preview
         topBar={<></>}
-        gateDate={draft.date || null}
         onSceneIndex={(i, total) => setEnded(i >= total - 1)}
       />
 

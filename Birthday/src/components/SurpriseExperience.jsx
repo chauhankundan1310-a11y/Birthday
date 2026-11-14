@@ -4,7 +4,6 @@ import { getTheme } from '../data/themes';
 import BalloonLayer from './BalloonLayer';
 import MusicPlayer from './MusicPlayer';
 import LightsOff from './LightsOff';
-import CountdownGate from './CountdownGate';
 import BirthdayWelcome from './BirthdayWelcome';
 import CakeCelebration from './CakeCelebration';
 import MessageEnvelopes from './MessageEnvelopes';
@@ -13,10 +12,9 @@ import LetterScreen from './LetterScreen';
 import GalleryScreen from './GalleryScreen';
 import Finale from './Finale';
 
-export default function SurpriseExperience({ data, preview = false, topBar = null, onSceneIndex = null, gateDate = null }) {
+export default function SurpriseExperience({ data, preview = false, topBar = null, onSceneIndex = null }) {
   const theme = getTheme(data.themeId);
   const [scene, setScene] = useState(0);
-  const [gateDone, setGateDone] = useState(!gateDate);
   const next = () => setScene((s) => s + 1);
   const replay = () => setScene(0);
 
@@ -96,10 +94,6 @@ export default function SurpriseExperience({ data, preview = false, topBar = nul
         )
       )}
 
-      {gateDate && !gateDone && (
-        <CountdownGate date={gateDate} preview={preview} onDone={() => setGateDone(true)} />
-      )}
-
       <AnimatePresence mode="wait">
         <motion.div
           key={scene}
@@ -109,7 +103,7 @@ export default function SurpriseExperience({ data, preview = false, topBar = nul
           transition={{ duration: 0.4 }}
           style={{ position: 'relative', zIndex: 2, minHeight: '100vh' }}
         >
-          {gateDone ? current.node : null}
+          {current.node}
         </motion.div>
       </AnimatePresence>
     </div>
